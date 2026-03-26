@@ -5,6 +5,21 @@
 <h1>Properties</h1>
 
 <div id="properties">
+  <div class="search-form">
+    <%= form_with url: properties_path, method: :get, local: true do |f| %>
+      <%= f.label :q, "Keywords" %>
+      <%= f.text_field :q, placeholder: "Search keywords…" %>
+      <%= f.number_field :min_price, placeholder: "Min price" %>
+      <%= f.number_field :max_price, placeholder: "Max price" %>
+      <%= f.number_field :bedrooms, placeholder: "Bedrooms" %>
+      <%= f.number_field :bathrooms, placeholder: "Bathrooms" %>
+      <%= f.text_field :location, placeholder: "Location" %>
+      <%= f.number_field :radius, placeholder: "Radius (km)" %>
+      <%= f.submit "Search" %>
+      <%= link_to "Clear", properties_path, class: "clear-filters" %>
+    <% end %>
+  </div>
+
   <% @properties.each do |property| %>
     <%= render property %>
     <p>
