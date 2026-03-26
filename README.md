@@ -1,24 +1,3 @@
-# README
+# Real Estate Listing App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+A Ruby on Rails application showcasing property listings with photos, maps, advanced filters, agent profiles, and saved searches. Built as a flagship portfolio project to demonstrate full‑stack architecture, geolocation, search, and background job processing.
