@@ -3,7 +3,16 @@ class PropertiesController < ApplicationController
 
   # GET /properties or /properties.json
   def index
-    @properties = PropertySearch.new(params).results
+    @properties = Property.all
+
+    if params[:q].present?
+      @properties = @properties.search_full_text(params[:q])
+    end
+
+    @properties = @properties.min_price(params[:min_price])
+    @properties = @properties.max_price(params[:max_price])
+    @properties = @properties.bedrooms(params[:bedrooms])
+    @properties = @properties.bathrooms(params[:bathrooms])
   end
 
   # GET /properties/1 or /properties/1.json
@@ -65,6 +74,14 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.fetch(:property, {})
+      params.require(:property).permit(
+        :title,
+        :description,
+        :price,
+        :bedrooms,
+        :bathrooms,
+        :address,
+        photos: []
+      )
     end
 end

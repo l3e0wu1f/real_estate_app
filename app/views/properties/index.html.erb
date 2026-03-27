@@ -2,37 +2,33 @@
 
 <% content_for :title, "Properties" %>
 
-<h1 class="text-3xl font-bold mb-6">Properties</h1>
+<h1 class="text-3xl font-bold mb-6">Available Listings</h1>
 
 <div id="properties">
-<div class="bg-white shadow p-4 rounded mb-6">
-  <%= form_with url: properties_path, method: :get, local: true do |f| %>
-    <div class="grid grid-cols-2 gap-4">
-      <%= f.text_field :q, placeholder: "Search keywords…", class: "border p-2 rounded" %>
-      <%= f.number_field :min_price, placeholder: "Min price", class: "border p-2 rounded" %>
-      <%= f.number_field :max_price, placeholder: "Max price", class: "border p-2 rounded" %>
-      <%= f.number_field :bedrooms, placeholder: "Bedrooms", class: "border p-2 rounded" %>
-      <%= f.number_field :bathrooms, placeholder: "Bathrooms", class: "border p-2 rounded" %>
-      <%= f.text_field :location, placeholder: "Location", class: "border p-2 rounded" %>
-      <%= f.number_field :radius, placeholder: "Radius (km)", class: "border p-2 rounded" %>
-    </div>
+  <div class="bg-white shadow p-4 pb-6 rounded mb-6">
+    <%= form_with url: properties_path, method: :get, local: true do |f| %>
+      <div class="grid grid-cols-2 gap-4 p-4">
+        <%= f.text_field :q, placeholder: "Search keywords…", class: "border p-2 rounded" %>
+        <%= f.number_field :min_price, placeholder: "Min price", class: "border p-2 rounded" %>
+        <%= f.number_field :max_price, placeholder: "Max price", class: "border p-2 rounded" %>
+        <%= f.number_field :bedrooms, placeholder: "Bedrooms", class: "border p-2 rounded" %>
+        <%= f.number_field :bathrooms, placeholder: "Bathrooms", class: "border p-2 rounded" %>
+        <%= f.text_field :location, placeholder: "Location", class: "border p-2 rounded" %>
+        <%= f.number_field :radius, placeholder: "Radius (km)", class: "border p-2 rounded" %>
+      </div>
 
-    <%= f.submit "Search", class: "mt-4 bg-blue-600 text-white px-4 py-2 rounded" %>
-  <% end %>
-  
-  <div class="space-y-4">
-    <ul>
-    <% @properties.each do |property| %>
-      <li>
-        <div class="bg-white shadow p-4 rounded">
-          <h2 class="text-xl font-semibold"><%= property.title %></h2>
-          <p class="text-gray-600">$<%= property.price %></p>
-          <%= link_to "Show this property", property, class: "text-blue-600 underline" %>
-        </div>
-      </li>
+      <%= f.submit "Search", class: "ml-4 mt-4 bg-blue-600 text-white px-4 py-2 rounded" %>
+      <div class="ml-4 inline">
+        <%= link_to "Reset filters", properties_path %>
+      </div>
     <% end %>
-    </ul>
   </div>
-</div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <% @properties.each do |property| %>
+      <%= render partial: "property", locals: { property: property } %>
+    <% end %>
+  </div>
 
-<%= link_to "New property", new_property_path %>
+  <%= link_to "Create new property listing", new_property_path %>
+</div>

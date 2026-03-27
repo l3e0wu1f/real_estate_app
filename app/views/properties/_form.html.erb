@@ -1,4 +1,4 @@
-<%= form_with(model: property) do |form| %>
+<%= form_with model: @property, html: { multipart: true } do |form| %>
   <%= form.label :title %>
   <%= form.text_field :title %>
 
@@ -16,6 +16,9 @@
 
   <%= form.label :description %>
   <%= form.text_area :description %>
+
+  <%= form.label :photos %>
+  <%= form.file_field :photos, multiple: true, class: "border p-2 rounded" %>
 
   <% if property.errors.any? %>
     <div style="color: red">
