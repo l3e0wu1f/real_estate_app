@@ -20,9 +20,9 @@ class Property < ApplicationRecord
 
   pg_search_scope :search_full_text,
     against: {
-      title: 'A',
-      description: 'B',
-      address: 'A'
+      title: "A",
+      description: "B",
+      address: "A"
     },
     using: {
       tsearch: {

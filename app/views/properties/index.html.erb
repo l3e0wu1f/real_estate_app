@@ -19,13 +19,15 @@
       <%= link_to "Clear", properties_path, class: "clear-filters" %>
     <% end %>
   </div>
-
-  <% @properties.each do |property| %>
-    <%= render property %>
-    <p>
-      <%= link_to "Show this property", property %>
-    </p>
-  <% end %>
+  
+  <ul>
+    <% @properties.each do |property| %>
+      <li>
+        <%= link_to property.title, property %>
+        — $<%= property.price %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <%= link_to "New property", new_property_path %>
