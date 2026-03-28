@@ -1,12 +1,25 @@
-<% content_for :title, "Editing property" %>
+<% content_for :title, "Editing Property" %>
 
-<h1>Editing property</h1>
+<div class="max-w-3xl mx-auto">
+  <!-- Page Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Edit Property</h1>
+    <p class="text-gray-600">Update the details of this listing below.</p>
+  </div>
 
-<%= render "form", property: @property %>
+  <!-- Form Card -->
+  <div class="bg-green-200 shadow rounded-lg p-6">
+    <%= render "form", property: @property %>
+  </div>
 
-<br>
+  <!-- Footer Actions -->
+  <div class="mt-6 flex items-center justify-between">
+    <%= link_to "View listing",
+          @property,
+          class: "text-blue-600 hover:underline font-medium" %>
 
-<div>
-  <%= link_to "Show this property", @property %> |
-  <%= link_to "Back to properties", properties_path %>
+    <%= link_to "Back to properties",
+          properties_path,
+          class: "text-gray-600 hover:text-gray-800" %>
+  </div>
 </div>

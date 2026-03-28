@@ -1,30 +1,64 @@
-<%= form_with model: @property, html: { multipart: true } do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title %>
+<%= form_with model: @property, html: { multipart: true }, class: "space-y-6 bg-green-200" do |form| %>
 
-  <%= form.label :price %>
-  <%= form.number_field :price %>
+  <!-- Title -->
+  <div>
+    <%= form.label :title, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :title,
+          class: "w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white" %>
+  </div>
 
-  <%= form.label :bedrooms %>
-  <%= form.number_field :bedrooms %>
+  <!-- Price -->
+  <div>
+    <%= form.label :price, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.number_field :price,
+          class: "w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white" %>
+  </div>
 
-  <%= form.label :bathrooms %>
-  <%= form.number_field :bathrooms %>
+  <!-- Bedrooms & Bathrooms -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div>
+      <%= form.label :bedrooms, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :bedrooms,
+            class: "w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white" %>
+    </div>
 
-  <%= form.label :address %>
-  <%= form.text_field :address %>
+    <div>
+      <%= form.label :bathrooms, class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= form.number_field :bathrooms,
+            class: "w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white" %>
+    </div>
+  </div>
 
-  <%= form.label :description %>
-  <%= form.text_area :description %>
+  <!-- Address -->
+  <div>
+    <%= form.label :address, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :address,
+          class: "w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white" %>
+  </div>
 
-  <%= form.label :photos %>
-  <%= form.file_field :photos, multiple: true, class: "border p-2 rounded" %>
+  <!-- Description -->
+  <div>
+    <%= form.label :description, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_area :description,
+          rows: 5,
+          class: "w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white" %>
+  </div>
 
+  <!-- Photos -->
+  <div>
+    <%= form.label :photos, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.file_field :photos,
+          multiple: true,
+          class: "w-full border-gray-300 rounded-lg shadow-sm bg-white p-2 cursor-pointer" %>
+  </div>
+
+  <!-- Error Messages -->
   <% if property.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
-
-      <ul>
+    <div class="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg">
+      <h2 class="font-semibold mb-2">
+        <%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:
+      </h2>
+      <ul class="list-disc pl-5 space-y-1">
         <% property.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -32,7 +66,10 @@
     </div>
   <% end %>
 
+  <!-- Submit Button -->
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save",
+          class: "bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition font-medium cursor-pointer" %>
   </div>
+
 <% end %>

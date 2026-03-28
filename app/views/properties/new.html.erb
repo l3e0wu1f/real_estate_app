@@ -1,11 +1,21 @@
-<% content_for :title, "New property" %>
+<% content_for :title, "Editing Property" %>
 
-<h1>New property</h1>
+<div class="max-w-3xl mx-auto">
+  <!-- Page Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Add Property</h1>
+    <p class="text-gray-600">Enter the details of this listing below.</p>
+  </div>
 
-<%= render "form", property: @property %>
+  <!-- Form Card -->
+  <div class="bg-green-200 shadow rounded-lg p-6">
+    <%= render "form", property: @property %>
+  </div>
 
-<br>
-
-<div>
-  <%= link_to "Back to properties", properties_path %>
+  <!-- Footer Actions -->
+  <div class="mt-6 text-right">
+    <%= link_to "Back to properties",
+          properties_path,
+          class: "text-gray-600 hover:text-gray-800" %>
+  </div>
 </div>

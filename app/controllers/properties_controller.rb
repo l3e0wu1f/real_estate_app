@@ -28,6 +28,21 @@ class PropertiesController < ApplicationController
   def edit
   end
 
+  def update
+    # Attach new photos if provided
+    if property_params[:photos].present?
+      @property.photos.attach(property_params[:photos])
+    end
+
+    # Update everything except photos
+    if @property.update(property_params.except(:photos))
+      redirect_to @property, notice: "Property was successfully updated.", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+
   # POST /properties or /properties.json
   def create
     @property = Property.new(property_params)
@@ -38,19 +53,6 @@ class PropertiesController < ApplicationController
         format.json { render :show, status: :created, location: @property }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /properties/1 or /properties/1.json
-  def update
-    respond_to do |format|
-      if @property.update(property_params)
-        format.html { redirect_to @property, notice: "Property was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @property }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @property.errors, status: :unprocessable_entity }
       end
     end
