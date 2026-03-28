@@ -2,6 +2,15 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
+r2:
+  service: S3
+  access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
+  region: <%= ENV["AWS_REGION"] %>
+  bucket: <%= ENV["AWS_BUCKET"] %>
+  endpoint: <%= ENV["AWS_ENDPOINT"] %>
+  force_path_style: true
+
 local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
