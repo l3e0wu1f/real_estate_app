@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_29_172341) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_30_042831) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -64,6 +64,55 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_29_172341) do
     t.string "status"
     t.string "title"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "solid_queue_blocked_executions", force: :cascade do |t|
+    t.string "concurrency_key", null: false
+    t.datetime "created_at", null: false
+    t.bigint "job_id", null: false
+  end
+
+  create_table "solid_queue_failed_executions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "error_backtrace"
+    t.string "error_class"
+    t.text "error_message"
+    t.bigint "job_id", null: false
+  end
+
+  create_table "solid_queue_jobs", force: :cascade do |t|
+    t.string "active_job_id"
+    t.text "arguments", null: false
+    t.string "class_name", null: false
+    t.string "concurrency_key"
+    t.datetime "created_at", null: false
+    t.datetime "finished_at"
+    t.integer "priority", default: 0, null: false
+    t.string "queue_name", null: false
+    t.datetime "scheduled_at"
+    t.string "state", default: "pending", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "solid_queue_processes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "hostname", null: false
+    t.string "kind", null: false
+    t.datetime "last_heartbeat_at", null: false
+    t.integer "pid", null: false
+  end
+
+  create_table "solid_queue_ready_executions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "job_id", null: false
+    t.integer "priority", default: 0, null: false
+    t.string "queue_name"
+    t.index ["priority"], name: "index_solid_queue_ready_executions_on_priority"
+  end
+
+  create_table "solid_queue_scheduled_executions", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.datetime "scheduled_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
