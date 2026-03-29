@@ -93,10 +93,10 @@ production:
     adapter: postgresql
     url: <%= ENV["DATABASE_URL"] %>
 
-  cable:
+  queue:
     adapter: postgresql
     url: <%= ENV["DATABASE_URL"] %>
 
-  queue:
+  cache:
     adapter: postgresql
     url: <%= ENV["DATABASE_URL"] %>
