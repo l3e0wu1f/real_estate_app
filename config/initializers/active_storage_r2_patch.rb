@@ -1,11 +1,11 @@
-# Patch Active Storage to disable multiple checksum headers for Cloudflare R2
+# Disable checksum headers for Cloudflare R2 (Rails 8 compatible)
 Rails.application.config.to_prepare do
-  ActiveStorage::Service::S3Service.prepend(Module.new do
-    def upload(key, io, checksum: nil, **options)
+  Aws::S3::Client.prepend(Module.new do
+    def put_object(params = {}, options = {})
       # Cloudflare R2 rejects multiple checksum headers.
-      # Rails 8 sends both MD5 + SHA256, so we strip them.
-      options.delete(:checksum)
-      super(key, io, checksum: nil, **options)
+      params.delete(:checksum_algorithm)
+      params.delete(:content_md5)
+      super(params, options)
     end
   end)
 end
