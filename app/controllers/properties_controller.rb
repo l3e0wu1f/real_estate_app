@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties or /properties.json
   def index
-    @properties = Property.all
+    @properties = Property.order(created_at: :asc)
 
     if params[:q].present?
       @properties = @properties.search_full_text(params[:q])
@@ -29,19 +29,19 @@ class PropertiesController < ApplicationController
   end
 
   def update
-    # Attach new photos if provided
-    if property_params[:photos].present?
-      @property.photos.attach(property_params[:photos])
+    new_photos = property_params[:photos].select { |p| p.is_a?(ActionDispatch::Http::UploadedFile) }
+
+    if new_photos.any?
+      @property.photos.purge
+      @property.photos.attach(new_photos)
     end
 
-    # Update everything except photos
     if @property.update(property_params.except(:photos))
       redirect_to @property, notice: "Property was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
   end
-
 
   # POST /properties or /properties.json
   def create

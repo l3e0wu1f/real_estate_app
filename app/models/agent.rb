@@ -4,6 +4,7 @@ class Agent < ApplicationRecord
 
   # Validations
   validates :fullname, :phone, :bio, presence: true
+  validates :photo_url, format: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true
 
   # Active Storage
   has_many_attached :photos

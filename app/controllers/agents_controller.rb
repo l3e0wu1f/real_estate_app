@@ -78,6 +78,7 @@ class AgentsController < ApplicationController
         :fullname,
         :bio,
         :phone,
+        :photo_url,
         photos: []
       )
     end
