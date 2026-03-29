@@ -65,6 +65,15 @@ bin/dev
 <br>
 Your app will be available at: <a href="http://localhost:3000">http://localhost:3000</a>
 
+### **8. Populate seed data**
+```bash  
+rails runner db/properties_seed.rb
+```
+and
+```bash  
+rails runner db/properties_seed.rb
+```
+
 
 # Architecture Overview
 This project is structured to demonstrate clean, scalable Rails architecture with modern frontend tooling.  
@@ -93,7 +102,7 @@ This project is structured to demonstrate clean, scalable Rails architecture wit
 - Optional Stimulus integration
 ### **6. Geolocation & Mapping**
 - Properties store latitude/longitude
-- Mapbox or Google Maps integration
+- Mapbox API integration
 - Reverse geocoding via background jobs
 ### **7. Search & Filtering**
 - Keyword search with PgSearch
