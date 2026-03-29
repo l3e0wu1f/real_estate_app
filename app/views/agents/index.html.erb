@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Agents" %>
+
+<h1 class="text-3xl font-bold mb-6">Our Licensed Agents</h1>
+
+<div id="agents">
+
+  <div class="bg-white shadow p-4 pb-6 rounded mb-6">
+    <%= form_with url: agents_path, method: :get, local: true do |f| %>
+      <div class="grid grid-cols-2 gap-4 p-4">
+        <%= f.text_field :q, placeholder: "Search keywords…", class: "border p-2 rounded" %>
+        <%= f.text_field :fullname, placeholder: "Name", class: "border p-2 rounded" %>
+        <%= f.text_field :phone, placeholder: "Phone", class: "border p-2 rounded" %>
+      </div>
+
+      <%= f.submit "Search", class: "ml-4 mt-4 bg-blue-600 text-white px-4 py-2 rounded" %>
+      <div class="ml-4 inline">
+        <%= link_to "Reset filters", agents_path %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <% @agents.each do |agent| %>
+      <%= render partial: "agent", locals: { agent: agent } %>
+    <% end %>
+  </div>
+
+  <%= link_to "Create new agent profile", new_agent_path %>
+</div>

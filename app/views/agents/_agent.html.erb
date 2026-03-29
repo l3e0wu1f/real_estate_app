@@ -1,0 +1,36 @@
+<div class="bg-white shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+    <!-- Photo -->
+    <% if agent.photos.attached? %>
+        <% unless controller.action_name == "show" %>
+            <%= link_to agent do %>
+                <%= image_tag agent.photos.first.variant(resize_to_fill: [600, 400]),
+                        class: "w-full h-60 object-cover" %>
+            <% end %>
+        <% end %>
+        <% if controller.action_name == 'show' %>
+            <%= image_tag agent.photos.first.variant(resize_to_fill: [600, 400]),
+                class: "w-full h-82 object-cover" %>
+        <% end %>
+    <% else %>
+    <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
+        No Photo Available
+    </div>
+    <% end %>
+
+  <!-- Content -->
+  <div class="p-4 space-y-2">
+    <h2 class="text-xl font-semibold text-gray-900">
+      <%= agent.fullname %>
+    </h2>
+
+    <p class="text-black text-lg">
+      <%= agent.phone %>
+    </p>
+
+    <% unless controller.action_name == "show" %>
+        <%= link_to "View Agent Profile",
+        agent,
+        class: "inline-block mt-3 text-blue-600 hover:underline font-medium" %>
+    <% end %>
+  </div>
+</div>

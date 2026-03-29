@@ -1,6 +1,6 @@
-# 🏡 Real Estate Listing App
+# Real Estate Listing App
 <br>
-A modern full‑stack **Ruby on Rails** application for browsing, filtering, and managing real estate listings. Built as a flagship portfolio project to demonstrate clean architecture, scalable design patterns, and a polished user experience.
+A modern full‑stack <b>Ruby on Rails</b> application for browsing, filtering, and managing real estate listings. Built as a flagship portfolio project to demonstrate clean architecture, scalable design patterns, and a polished user experience.
 
 ### **Key Features**
 - Photo uploads with Active Storage + on‑the‑fly image variants  
@@ -70,7 +70,7 @@ Your app will be available at: <a href="http://localhost:3000">http://localhost:
 This project is structured to demonstrate clean, scalable Rails architecture with modern frontend tooling.  
 
 ### *Core Components*
-### **1. Rails 7/8 Application**
+### **1. Rails 8 Application**
 - Standard MVC architecture
 - RESTful controllers
 - Strong parameters

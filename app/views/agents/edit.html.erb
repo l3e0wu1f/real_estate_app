@@ -1,0 +1,25 @@
+<% content_for :title, "Editing Agent Profile" %>
+
+<div class="max-w-3xl mx-auto">
+  <!-- Page Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Edit Agent Profile</h1>
+    <p class="text-gray-600">Update the details for this agent below.</p>
+  </div>
+
+  <!-- Form Card -->
+  <div class="bg-green-200 shadow rounded-lg p-6">
+    <%= render "form", agent: @agent %>
+  </div>
+
+  <!-- Footer Actions -->
+  <div class="mt-6 flex items-center justify-between">
+    <%= link_to "View agent profile",
+          @agent,
+          class: "text-blue-600 hover:underline font-medium" %>
+
+    <%= link_to "Back to agents",
+          agents_path,
+          class: "text-gray-600 hover:text-gray-800" %>
+  </div>
+</div>
