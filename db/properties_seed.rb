@@ -99,6 +99,7 @@ puts "Attaching photos to properties..."
 
 Property.order(:id).each_with_index do |property, index|
   image_url = PROPERTY_IMAGES[index]
+  next if image_url.blank?
 
   file = URI.open(image_url)
   property.photos.attach(
