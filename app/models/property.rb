@@ -5,7 +5,7 @@ class Property < ApplicationRecord
   validates :bedrooms, :bathrooms, numericality: { greater_than_or_equal_to: 0 }
 
   # Active Storage
-  has_many_attached :photos
+  has_many_attached :photos, dependent: :purge_later
 
   # Geocoder
   geocoded_by :address
