@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_29_172341) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_30_033606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -66,6 +66,45 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_29_172341) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "solid_queue_failed_executions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "error_backtrace"
+    t.text "error_message"
+    t.bigint "job_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_solid_queue_failed_executions_on_job_id"
+  end
+
+  create_table "solid_queue_jobs", force: :cascade do |t|
+    t.text "arguments", default: "[]", null: false
+    t.string "class_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "finished_at"
+    t.string "queue_name", null: false
+    t.datetime "scheduled_at"
+    t.string "state", default: "pending", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "solid_queue_processes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "hostname", null: false
+    t.string "kind", null: false
+    t.datetime "last_heartbeat_at", null: false
+    t.integer "pid", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "solid_queue_scheduled_executions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "job_id", null: false
+    t.datetime "run_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_solid_queue_scheduled_executions_on_job_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id"
+  add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id"
 end
