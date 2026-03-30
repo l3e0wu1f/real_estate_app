@@ -5,7 +5,10 @@ class Property < ApplicationRecord
   validates :bedrooms, :bathrooms, numericality: { greater_than_or_equal_to: 0 }
 
   # Active Storage
-  has_many_attached :photos, dependent: :purge_later
+  has_many_attached :photos, dependent: :purge_later do |attachable|
+    attachable.variant :hero, resize_to_fill: [1200, 600]
+    attachable.variant :card, resize_to_fill: [600, 400]
+  end
 
   # Geocoder
   geocoded_by :address
@@ -40,7 +43,4 @@ class Property < ApplicationRecord
   scope :bedrooms,  ->(value) { where(bedrooms: value) if value.present? }
   scope :bathrooms, ->(value) { where(bathrooms: value) if value.present? }
 
-  has_many_attached :photos do |attachable|
-    attachable.variant :hero, resize_to_fill: [1200, 600]
-  end
 end
