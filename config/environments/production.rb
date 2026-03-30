@@ -23,6 +23,8 @@ Rails.application.configure do
 
   # Use Cloudflare R2 for ActiveStorage in production
   config.active_storage.service = :r2
+  config.active_storage.resolve_model_to_route = :rails_storage_proxy
+  config.active_storage.url_options = { host: 'https://realestateapp-production-bfb3.up.railway.app/' }
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # config.assume_ssl = true
