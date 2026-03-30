@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_30_034718) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_30_035826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -79,6 +79,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_30_034718) do
     t.string "active_job_id"
     t.text "arguments", default: "[]", null: false
     t.string "class_name", null: false
+    t.string "concurrency_key"
     t.datetime "created_at", null: false
     t.datetime "finished_at"
     t.integer "priority", default: 0, null: false
