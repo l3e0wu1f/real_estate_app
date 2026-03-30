@@ -39,4 +39,8 @@ class Property < ApplicationRecord
   scope :max_price, ->(value) { where("price <= ?", value) if value.present? }
   scope :bedrooms,  ->(value) { where(bedrooms: value) if value.present? }
   scope :bathrooms, ->(value) { where(bathrooms: value) if value.present? }
+
+  has_many_attached :photos do |attachable|
+    attachable.variant :hero, resize_to_fill: [1200, 600]
+  end
 end

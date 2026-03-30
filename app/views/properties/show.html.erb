@@ -16,8 +16,7 @@
 
   <!-- Thumbnail -->
   <% if @property.photos.attached? %>
-    <%= image_tag @property.photos.first.variant(resize_to_fill: [1200, 600]),
-          class: "w-full h-80 object-cover rounded-lg shadow" %>
+    <%= image_tag @property.photos.first.variant(:hero), class: "w-full h-80 object-cover rounded-lg shadow" %>
   <% else %>
     <div class="w-full h-80 bg-gray-200 flex items-center justify-center text-gray-500 rounded-lg">
       No Photo Available

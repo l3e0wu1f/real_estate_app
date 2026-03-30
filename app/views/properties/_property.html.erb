@@ -1,21 +1,21 @@
 <div class="bg-white shadow-sm rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-    <!-- Thumbnail -->
-    <% if property.photos.attached? %>
-        <% unless controller.action_name == "show" %>
-            <%= link_to property do %>
-                <%= image_tag property.photos.first.variant(resize_to_fill: [600, 400]),
-                        class: "w-full h-82 object-cover" %>
-            <% end %>
-        <% end %>
-        <% if controller.action_name == 'show' %>
-            <%= image_tag property.photos.first.variant(resize_to_fill: [600, 400]),
-                class: "w-full h-82 object-cover" %>
-        <% end %>
+  <!-- Thumbnail -->
+  <% if property.photos.attached? %>
+    <% image = property.photos.first.variant(:card) %>
+
+    <% if controller.action_name == "show" %>
+      <%= image_tag image, class: "w-full h-82 object-cover" %>
     <% else %>
-    <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
-        No Photo Available
-    </div>
+      <%= link_to property do %>
+        <%= image_tag image, class: "w-full h-82 object-cover" %>
+      <% end %>
     <% end %>
+
+  <% else %>
+    <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
+      No Photo Available
+    </div>
+  <% end %>
 
   <!-- Content -->
   <div class="p-4 space-y-2">
